@@ -10,6 +10,14 @@ import { useState, useEffect } from "react";
 //  -[keyword,...]값이 있는 경우 -> 해당 값이 변할 때마다 실행
 //  - 여러 개 입력 가능
 
+function Hello(){
+  useEffect(() => {
+    console.log("created:)");
+    return () => console.log("destroyed :(");
+  }, []);
+  return <h1>Hello</h1>;
+}
+
 function App() {
   const [counter, setValue] = useState(0);
   const [keyword, setKeyword] = useState("");
@@ -29,12 +37,17 @@ function App() {
   useEffect(() => {
     console.log("i run when 'counter' & 'keyword' change" );
   }, [counter, keyword]);
+
+  const [showing, setShowing] = useState(false);
+  const onClickShow = () => setShowing((prev) => !prev);
   
   return (
     <div>
       <input value={keyword} onChange={onChange} type="text" placeholder="Search here..." />
       <h1>{counter}</h1>
       <button onClick={onClick}>click me</button>
+      <button onClick={onClickShow}>{showing ? "Hide" : "Show"}</button>
+      {showing ? <Hello/>:null}
     </div>
   );
 }
