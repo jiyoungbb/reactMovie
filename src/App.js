@@ -12,10 +12,9 @@ function App() {
     if(toDo === ""){
       return;
     }
-    setToDos(currentArray => [toDo, ...currentArray]);
+    setToDos(currentArray => [...currentArray, toDo]);
     setToDo("");
   };
-  console.log(toDos);
 
   return (
     <div>
@@ -28,6 +27,12 @@ function App() {
           placeholder="Wrote your to do..."/>
           <button>Add To Do</button>
       </form>
+      <hr/>
+      <ul>
+        {toDos.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
     </div>
   );
 }
